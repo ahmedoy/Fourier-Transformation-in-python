@@ -1,3 +1,9 @@
+#I know there's a much more easier way to do this which is the integral of e^pi*i*f or something like that but I just wanted to - 
+#make a code that manually calculates it
+
+# I highly suggest you watch 3blue 1 brown's youtube video about fourier transformations to get an idea of what I'm trying to do here
+#here's the link : https://www.youtube.com/watch?v=spUNpyF58BY
+
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -36,14 +42,25 @@ plt.show()
 '''
 Part 2 of the code:
 
-Now that we have the x and y plots of the graph, we want to make a vector and use it to get polar coordinates 
+Now that we have the x and y plots of the graph, we want to make a vector and use it to graph the wave in that circular almost polar 
+coordinates fashion
 
-x= r*cos(theta)
-y= r*sin(theta)
+The law of polar coordianates tell us that 
+x = r*cos(theta)
+y = r*sin(theta)
+
+So:
+the x coordinate of any point  will equal the output of the wave multiplied by cosine(the angle)
+the y coordinate of any point  will equal the output of the wave multiplied by sine(the angle)
+
+then once we've graphed the entire graph we will get the average of all x coordinates and y coordinates giving us the 
+
 '''
-
+#those will store the x and y coordinates of all centers of mass for different speeds/frequencies of the vector
 centersx=[]
 centersy=[]
+
+
 #frequencies = []
 f_step = 0.1
 frequency_list = np.arange(0.1,   10,     f_step,      dtype='float32')
