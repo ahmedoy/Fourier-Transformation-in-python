@@ -53,34 +53,43 @@ So:
 the x coordinate of any point  will equal the output of the wave multiplied by cosine(the angle)
 the y coordinate of any point  will equal the output of the wave multiplied by sine(the angle)
 
-then once we've graphed the entire graph we will get the average of all x coordinates and y coordinates giving us the 
+then once we've graphed the entire graph we will get the average of all x coordinates and y coordinates giving us the
+x and y coordinates of the center of mass 
+
+now we get those x and y coordinates for the center of mass for different frequencies/speeds of the rotating vector and 
+then graph them 
 
 '''
 #those will store the x and y coordinates of all centers of mass for different speeds/frequencies of the vector
 centersx=[]
 centersy=[]
 
-
-#frequencies = []
+#Here we generate all the rotating vector frequencies for which we will calcualte the x and y coordinates of center of mass
+#Here we will test frequencies from 0.1 to 10 by adding 0.1 each time so were testing a total of 
 f_step = 0.1
 frequency_list = np.arange(0.1,   10,     f_step,      dtype='float32')
+
+
+#here we plot the graph of the rotating  vector and calculate center of mass c
 for frequency in frequency_list:
-    fourier_x = np.empty((len(outputs)),dtype='float32')
-    fourier_y = np.empty((len(outputs)),dtype='float32')
-    #ppr = ((2*np.pi)/frequency)  *  (1/wave_step)         #points per rotation
+    #Xs and Ys will store the x and y coordinate for each point on the rotating vector graph
+    #We will later take the average of all those points to get x and y of c
+    Xs = np.empty((len(outputs)),dtype='float32')
+    Ys = np.empty((len(outputs)),dtype='float32')
+    
+    #PPR is points per rotation, to get this, we divide 2pi by the vector frequency and multiply by 1 over the wave step
+    PPR = ((2*np.pi)/frequency)  *  (1/wave_step)         
     points = len(frequency_list)
-    inc = (2*np.pi)/(((2*np.pi)/frequency)  *  (1/wave_step))
+    inc = (2*np.pi)/PPR  *  (1/wave_step))
     theta = 0
     counter=0
-    sumx = 0
-    sumy = 0
     for r in outputs:
         x = r*np.cos(theta)
         y = r*np.sin(theta)
         sumx+=x
         sumy+=y
-        fourier_x[counter] = x
-        fourier_y[counter] = y
+        Xs[counter] = x
+        Ys[counter] = y
         theta+=inc
         counter+=1
 
